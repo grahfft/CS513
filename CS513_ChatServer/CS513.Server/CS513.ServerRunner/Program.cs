@@ -1,4 +1,5 @@
-﻿using CS513.Interfaces.Server;
+﻿using System;
+using CS513.Interfaces.Server;
 
 namespace CS513.ServerRunner
 {
@@ -10,6 +11,15 @@ namespace CS513.ServerRunner
             IConnectionManager manager = server.ConnectionManager;
 
             manager.Configure();
+
+            string userInput = "";
+            while (userInput != null && userInput.ToLower() != "q")
+            {
+                Console.WriteLine("Press q to quit");
+                userInput = Console.ReadLine();
+            }
+
+            manager.Dispose();
         }
     }
 }

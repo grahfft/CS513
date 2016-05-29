@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using CS513.Interfaces;
@@ -33,9 +35,18 @@ namespace CS513.ServerSocketManager
             this.Dispose(false);
         }
 
+        public IReadOnlyDictionary<string, IConnectionHandler> ConnectionHandlers
+        {
+            get
+            {
+                return new ReadOnlyDictionary<string, IConnectionHandler>(this.connectionHandlers);
+            }
+        }
+
         public void Configure()
         {
             this.listener.NewConnectionReceived += this.CreateNewConnection;
+            this.listener.Start();
         }
 
         private void CreateNewConnection(object sender, Socket socket)
@@ -52,6 +63,8 @@ namespace CS513.ServerSocketManager
             IConnectionHandler connectionHandler = sender as IConnectionHandler;
             if (connectionHandler != null)
             {
+                IConnectionHandler handler = null;
+                this.connectionHandlers.TryRemove(connectionHandler.Name, out handler);
                 connectionHandler.MessageReceived -= this.HandleIncomingMessage;
                 connectionHandler.Disposing -= this.HandleConnectionDispose;
             }
@@ -74,7 +87,7 @@ namespace CS513.ServerSocketManager
             if (isDisposing && !this.disposed)
             {
                 this.disposed = true;
-
+                this.listener.Stop();
                 foreach (IConnectionHandler connectionHandler in connectionHandlers.Values)
                 {
                     connectionHandler.Dispose();

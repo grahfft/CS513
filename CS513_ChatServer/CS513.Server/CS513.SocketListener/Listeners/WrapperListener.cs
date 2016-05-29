@@ -7,6 +7,7 @@ namespace CS513.SocketListener.Listeners
 {
     /// <summary>
     /// This class wraps around a TcpListener
+    /// Not unit testable will need to manually run test cases
     /// </summary>
     [Listener(Name)]
     public class WrapperListener : IListener
@@ -35,15 +36,25 @@ namespace CS513.SocketListener.Listeners
 
         private void SocketAccepted(IAsyncResult ar)
         {
-            Socket newSocket = this.listener.EndAcceptSocket(ar);
-
-            EventHandler<Socket> handler = this.NewConnectionReceived;
-            if (handler != null)
+            try
             {
-                handler(this, newSocket);
-            }
+                if (this.listener.Pending())
+                {
+                    Socket newSocket = this.listener.EndAcceptSocket(ar);
 
-            this.listener.BeginAcceptSocket(this.SocketAccepted, null);
+                    EventHandler<Socket> handler = this.NewConnectionReceived;
+                    if (handler != null)
+                    {
+                        handler(this, newSocket);
+                    }
+                }
+
+                this.listener.BeginAcceptSocket(this.SocketAccepted, this.listener);
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
         }
     }
 }

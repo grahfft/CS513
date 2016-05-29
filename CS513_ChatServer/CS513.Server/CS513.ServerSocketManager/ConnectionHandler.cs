@@ -48,33 +48,36 @@ namespace CS513.ServerSocketManager
             }
             catch (Exception exception)
             {
-                
+                Console.WriteLine(exception.Message);
             }
         }
 
         private void MonitorConnection()
         {
-            bool currentRestart = this.restart;
-            if (!this.connection.IsConnected && currentRestart)
+            Task.Run(() =>
             {
-                //this.logger.LogInfo(string.Format("Client disconnected attempting to reconnect"));
-                this.Connect();
-                return;
-            }
+                bool currentRestart = this.restart;
+                if (!this.connection.IsConnected && currentRestart)
+                {
+                    //this.logger.LogInfo(string.Format("Client disconnected attempting to reconnect"));
+                    this.Connect();
+                    return;
+                }
 
-            byte[] data = this.connection.GetData();
-            IMessage message = this.messageHandler.GetMessage(data);
+                byte[] data = this.connection.GetData();
+                IMessage message = this.messageHandler.GetMessage(data);
 
-            EventHandler<IMessage> handler = this.MessageReceived;
-            if (message != null && handler != null)
-            {
-                Task.Run(() => handler(this, message));
-            }
+                EventHandler<IMessage> handler = this.MessageReceived;
+                if (message != null && handler != null)
+                {
+                    Task.Run(() => handler(this, message));
+                }
 
-            if (currentRestart)
-            {
-                this.MonitorConnection();
-            }
+                if (currentRestart)
+                {
+                    this.MonitorConnection();
+                }
+            });
         }
 
         public void Dispose()
