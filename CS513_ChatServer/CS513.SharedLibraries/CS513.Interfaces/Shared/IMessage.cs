@@ -8,6 +8,22 @@ using CS513.Interfaces.Server;
 
 namespace CS513.Interfaces
 {
+    public enum MessageCommand
+    {
+        ConnectionAck = 0,
+        LoginRequest = 1,
+        LoginAck = 2,
+        LoginNack = 3,
+        ChatMessage = 4,
+        ChatAck = 5,
+        UpdateName = 6,
+        UpdateAck = 7,
+        UpdateNack = 8,
+        WhisperMessage = 9,
+        WhisperAck = 10,
+        WhisperNack = 11,
+    }
+
     /// <summary>
     /// Interface for message sent over the wire
     /// </summary>
