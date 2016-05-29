@@ -27,14 +27,19 @@ namespace CS513.ServerSocketManager.Connections
             this.Dispose(false);
         }
 
+        public bool IsConnected
+        {
+            get { return this.socket.Connected; }
+        }
+
         public void SendMessage(byte[] data)
         {
             this.socket.Send(data);
         }
 
-        public void Connect()
+        public byte[] GetData()
         {
-            
+            return new byte[0];
         }
 
         public void Dispose()

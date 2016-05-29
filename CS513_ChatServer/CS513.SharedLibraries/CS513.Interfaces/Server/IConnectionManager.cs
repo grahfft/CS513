@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CS513.Interfaces.Shared
+namespace CS513.Interfaces.Server
 {
-    public interface IMessageHandler
+    public interface IConnectionManager : IDisposable
     {
-        IMessage GetMessage(byte[] data);
+        void Configure();
     }
 }

@@ -31,9 +31,38 @@ namespace CS513.ServerSocketManager.Connections
             this.Dispose(false);
         }
 
+        public bool IsConnected
+        {
+            get { return this.client.Connected; }
+        }
+
         public void SendMessage(byte[] data)
         {
             this.socket.Send(data);
+        }
+
+        public byte[] GetData()
+        {
+            byte[] bytes = new byte[1048576];//TODO figure out a better way this is nasty; currently set to 1 MB of data
+
+            if (this.client == null || !this.client.Connected)
+            {
+                return bytes;
+            }
+
+            NetworkStream stream = this.client.GetStream();
+
+            if (stream.CanRead)
+            {
+                int readSoFar = 0;
+                while (stream.DataAvailable)
+                {
+                    int interval = stream.Read(bytes, readSoFar, 1028);
+                    readSoFar = readSoFar + interval;
+                }
+            }
+
+            return bytes;
         }
 
         public void Dispose()

@@ -11,7 +11,7 @@ using CS513.Interfaces.Shared;
 
 namespace CS513.ServerSocketManager
 {
-    public class ConnectionManager
+    public class ConnectionManager : IConnectionManager
     {
         private IListener listener;
 
@@ -23,12 +23,19 @@ namespace CS513.ServerSocketManager
 
         private int connectionId = 1;
 
+        private bool disposed = false;
+
         public ConnectionManager(IListener listener, IMessageHandler messageHandler)
         {
             this.listener = listener;
             this.factory = new ConnectionFactory();
             this.messageHandler = messageHandler;
             this.connectionHandlers = new ConcurrentDictionary<string, IConnectionHandler>();
+        }
+
+        ~ConnectionManager()
+        {
+            this.Dispose(false);
         }
 
         public void Configure()
@@ -60,6 +67,27 @@ namespace CS513.ServerSocketManager
         {
             IConnectionHandler handler = sender as IConnectionHandler;
             Task.Run(() => message.ProcessMessage(handler, this.connectionHandlers));
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (isDisposing && !this.disposed)
+            {
+                this.disposed = true;
+
+                foreach (IConnectionHandler connectionHandler in connectionHandlers.Values)
+                {
+                    connectionHandler.Dispose();
+                }
+
+                this.connectionHandlers = null;
+            }
         }
     }
 }

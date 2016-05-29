@@ -14,5 +14,7 @@ namespace CS513.Interfaces
     public interface IMessage
     {
         void ProcessMessage(IConnectionHandler connection, ConcurrentDictionary<string, IConnectionHandler> connectionHandlers);
+
+        byte[] Serialize();
     }
 }

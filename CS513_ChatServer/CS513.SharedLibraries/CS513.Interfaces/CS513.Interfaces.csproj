@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Server\IConnection.cs" />
     <Compile Include="Server\IConnectionHandler.cs" />
+    <Compile Include="Server\IConnectionManager.cs" />
     <Compile Include="Server\IListener.cs" />
     <Compile Include="Shared\IMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

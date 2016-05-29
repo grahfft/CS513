@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CS513.Interfaces">
+      <HintPath>..\..\CS513.SharedLibraries\CS513.Interfaces\bin\Debug\CS513.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,6 +44,16 @@
   <ItemGroup>
     <Compile Include="Server.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CS513.ServerSocketManager\CS513.ServerSocketManager.csproj">
+      <Project>{4a2e8238-28f8-4754-9a92-2ddec3abdc6a}</Project>
+      <Name>CS513.ServerSocketManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CS513.SocketListener\CS513.SocketListener.csproj">
+      <Project>{171a83b9-3f6e-44f6-9c01-db8770c292a8}</Project>
+      <Name>CS513.SocketListener</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

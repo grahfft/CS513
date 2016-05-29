@@ -46,6 +46,8 @@ namespace CS513.SocketListener.Listeners
             {
                 handler(this, newSocket);
             }
+
+            this.listener.BeginAcceptSocket(this.SocketAccepted, null);
         }
     }
 }

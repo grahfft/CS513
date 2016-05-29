@@ -17,6 +17,8 @@ namespace CS513.ServerSocketManager
 
         private bool disposed = false;
 
+        private bool restart = false;
+
         public ConnectionHandler(IConnection connection, IMessageHandler messageHandler, string name)
         {
             this.connection = connection;
@@ -34,6 +36,49 @@ namespace CS513.ServerSocketManager
         public event EventHandler Disposing;
 
         public string Name { get; set; }
+
+        public void SendMessage(IMessage message)
+        {
+            this.connection.SendMessage(message.Serialize());
+        }
+
+        public void Connect()
+        {
+            try
+            {
+                this.restart = true;
+                this.MonitorConnection();
+            }
+            catch (Exception exception)
+            {
+                
+            }
+        }
+
+        private void MonitorConnection()
+        {
+            bool currentRestart = this.restart;
+            if (!this.connection.IsConnected && currentRestart)
+            {
+                //this.logger.LogInfo(string.Format("Client disconnected attempting to reconnect"));
+                this.Connect();
+                return;
+            }
+
+            byte[] data = this.connection.GetData();
+            IMessage message = this.messageHandler.GetMessage(data);
+
+            EventHandler<IMessage> handler = this.MessageReceived;
+            if (message != null && handler != null)
+            {
+                Task.Run(() => handler(this, message));
+            }
+
+            if (currentRestart)
+            {
+                this.MonitorConnection();
+            }
+        }
 
         public void Dispose()
         {
