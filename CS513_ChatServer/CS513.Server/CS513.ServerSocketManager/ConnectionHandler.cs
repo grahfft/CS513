@@ -91,6 +91,7 @@ namespace CS513.ServerSocketManager
             if (isDisposing && !this.disposed)
             {
                 this.disposed = true;
+                this.restart = false;
 
                 EventHandler handler = this.Disposing;
                 if (handler != null)

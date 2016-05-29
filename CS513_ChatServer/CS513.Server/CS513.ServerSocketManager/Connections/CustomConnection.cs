@@ -11,8 +11,11 @@ namespace CS513.ServerSocketManager.Connections
     /// <summary>
     /// this class acts like TcpClient
     /// </summary>
+    [Connection(Name)]
     public class CustomConnection : IConnection
     {
+        private const string Name = "Custom";
+
         private Socket socket;
 
         private bool disposed = false;
@@ -39,7 +42,19 @@ namespace CS513.ServerSocketManager.Connections
 
         public byte[] GetData()
         {
-            return new byte[0];
+            byte[] bytes = new byte[this.socket.Available + 1];
+
+            if (!this.socket.Connected)
+            {
+                return bytes;
+            }
+
+            if (this.socket.Available != 0)
+            {
+                this.socket.Receive(bytes);
+            }
+
+            return bytes;
         }
 
         public void Dispose()

@@ -11,8 +11,11 @@ namespace CS513.ServerSocketManager.Connections
     /// <summary>
     /// this class wraps around a tcp client
     /// </summary>
+    [Connection(Name)]
     public class WrapperConnection : IConnection
     {
+        private const string Name = "Tcp";
+
         private Socket socket;
 
         private TcpClient client;
@@ -67,7 +70,8 @@ namespace CS513.ServerSocketManager.Connections
 
         public void Dispose()
         {
-            
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         private void Dispose(bool disposing)

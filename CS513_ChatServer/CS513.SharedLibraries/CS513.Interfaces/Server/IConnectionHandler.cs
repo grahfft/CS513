@@ -13,5 +13,9 @@ namespace CS513.Interfaces.Server
         event EventHandler Disposing;
 
         string Name { get; set; }
+
+        void SendMessage(IMessage message);
+
+        void Connect();
     }
 }
