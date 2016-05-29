@@ -66,7 +66,7 @@ namespace CS513.ServerSocketManager
         private void HandleIncomingMessage(object sender, IMessage message)
         {
             IConnectionHandler handler = sender as IConnectionHandler;
-            Task.Run(() => message.ProcessMessage(handler, this.connectionHandlers));
+            Task.Run(() => message.ProcessMessage(handler, this.connectionHandlers, this.messageHandler));
         }
 
         public void Dispose()

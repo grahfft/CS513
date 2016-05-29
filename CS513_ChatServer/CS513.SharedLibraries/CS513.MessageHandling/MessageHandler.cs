@@ -21,5 +21,10 @@ namespace CS513.MessageHandling
         {
             return null;
         }
+
+        public IMessage GetMessage(IMessageHeader header, string message)
+        {
+            return null;
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CS513.Interfaces.Server;
+using CS513.Interfaces.Shared;
 
 namespace CS513.Interfaces
 {
@@ -29,8 +30,10 @@ namespace CS513.Interfaces
     /// </summary>
     public interface IMessage
     {
-        void ProcessMessage(IConnectionHandler connection, ConcurrentDictionary<string, IConnectionHandler> connectionHandlers);
+        void ProcessMessage(IConnectionHandler connection, ConcurrentDictionary<string, IConnectionHandler> connectionHandlers, IMessageHandler handler);
 
         byte[] Serialize();
+
+        void Deserialize(byte[] data);
     }
 }
