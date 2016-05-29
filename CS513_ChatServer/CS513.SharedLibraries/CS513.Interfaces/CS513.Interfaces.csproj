@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Server\IConnection.cs" />
+    <Compile Include="Server\IConnectionFactory.cs" />
     <Compile Include="Server\IConnectionHandler.cs" />
     <Compile Include="Server\IConnectionManager.cs" />
     <Compile Include="Server\IListener.cs" />

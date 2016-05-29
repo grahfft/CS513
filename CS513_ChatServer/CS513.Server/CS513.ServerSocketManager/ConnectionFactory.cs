@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
 using CS513.Interfaces.Server;
+using CS513.Interfaces.Shared;
 using CS513.ServerSocketManager.Connections;
 
 namespace CS513.ServerSocketManager
@@ -13,23 +11,34 @@ namespace CS513.ServerSocketManager
     /// <summary>
     /// Locates which service to use and will create all future services off this.
     /// </summary>
-    public class ConnectionFactory
+    public class ConnectionFactory : IConnectionFactory
     {
         private Type connectionType;
 
-        public ConnectionFactory()
+        private int connectionId = 1;
+
+        private IMessageHandler messageHandler;
+
+        public ConnectionFactory(IMessageHandler messageHandler)
         {
+            this.messageHandler = messageHandler;
             this.LoadConfigs();
         }
 
-        public IConnection GetNewConnection(Socket socket)
+        public IConnectionHandler GetNewConnection(Socket socket)
         {
+            IConnection connection = null;
+            
             if (this.connectionType == null)
             {
-                return new WrapperConnection(socket);
+                connection = new WrapperConnection(socket);
+            }
+            else
+            {
+                connection = (IConnection) Activator.CreateInstance(this.connectionType, socket);
             }
 
-            return (IConnection) Activator.CreateInstance(this.connectionType, socket);
+            return new ConnectionHandler(connection, this.messageHandler, this.connectionId++.ToString());
         }
 
         private void LoadConfigs()

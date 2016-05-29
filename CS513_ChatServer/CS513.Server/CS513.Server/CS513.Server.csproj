@@ -33,6 +33,9 @@
     <Reference Include="CS513.Interfaces">
       <HintPath>..\..\CS513.SharedLibraries\CS513.Interfaces\bin\Debug\CS513.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="CS513.MessageHandling">
+      <HintPath>..\..\CS513.SharedLibraries\CS513.MessageHandling\bin\Debug\CS513.MessageHandling.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

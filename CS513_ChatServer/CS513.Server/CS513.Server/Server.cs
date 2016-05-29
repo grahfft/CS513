@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CS513.Interfaces.Server;
+﻿using CS513.Interfaces.Server;
 using CS513.Interfaces.Shared;
+using CS513.MessageHandling;
 using CS513.ServerSocketManager;
 using CS513.SocketListener;
 
@@ -19,12 +15,15 @@ namespace CS513.Server
 
         private IMessageHandler messageHandler;
 
+        private IConnectionFactory connectionFactory;
+
         public Server()
         {
             this.listenerFactory = new ListenerFactory();
             this.Listener = this.listenerFactory.CreataListener();
-            this.messageHandler = null;
-            this.ConnectionManager = new ConnectionManager(this.Listener, this.messageHandler);
+            this.messageHandler = new MessageHandler();
+            this.connectionFactory = new ConnectionFactory(this.messageHandler);
+            this.ConnectionManager = new ConnectionManager(this.Listener, this.connectionFactory, this.messageHandler);
         }
 
         public IListener Listener { get; private set; }

@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using CS513.Interfaces;
 using CS513.Interfaces.Server;
@@ -15,21 +12,19 @@ namespace CS513.ServerSocketManager
     {
         private IListener listener;
 
-        private ConnectionFactory factory;
+        private IConnectionFactory factory;
 
         private ConcurrentDictionary<string, IConnectionHandler> connectionHandlers; 
 
         private IMessageHandler messageHandler;
 
-        private int connectionId = 1;
-
         private bool disposed = false;
 
-        public ConnectionManager(IListener listener, IMessageHandler messageHandler)
+        public ConnectionManager(IListener listener, IConnectionFactory factory, IMessageHandler messageHandler)
         {
             this.listener = listener;
-            this.factory = new ConnectionFactory();
             this.messageHandler = messageHandler;
+            this.factory = factory;
             this.connectionHandlers = new ConcurrentDictionary<string, IConnectionHandler>();
         }
 
@@ -45,8 +40,7 @@ namespace CS513.ServerSocketManager
 
         private void CreateNewConnection(object sender, Socket socket)
         {
-            IConnection connection = this.factory.GetNewConnection(socket);
-            IConnectionHandler connectionHandler = new ConnectionHandler(connection, this.messageHandler, this.connectionId++.ToString());
+            IConnectionHandler connectionHandler = this.factory.GetNewConnection(socket);
             connectionHandler.MessageReceived += this.HandleIncomingMessage;
             connectionHandler.Disposing += this.HandleConnectionDispose;
 
