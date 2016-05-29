@@ -139,7 +139,7 @@ namespace CS513.UnitTests
             bool success = connectionReceived.Task.Wait(1000);
             Assert.IsTrue(success);
 
-            Mock<IMessage> messageMock = new Mock<IMessage>();
+            Mock<IRequest> messageMock = new Mock<IRequest>();
             connectionHandlerMock.Object.MessageReceived += (sender, message) =>
             {
                 msgProcessed.TrySetResult(true);

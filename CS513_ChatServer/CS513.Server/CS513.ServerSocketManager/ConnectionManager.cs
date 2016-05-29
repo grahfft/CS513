@@ -70,7 +70,7 @@ namespace CS513.ServerSocketManager
             }
         }
 
-        private void HandleIncomingMessage(object sender, IMessage message)
+        private void HandleIncomingMessage(object sender, IRequest message)
         {
             IConnectionHandler handler = sender as IConnectionHandler;
             Task.Run(() => message.ProcessMessage(handler, this.connectionHandlers, this.messageHandler));

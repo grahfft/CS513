@@ -39,9 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Message.cs" />
     <Compile Include="MessageAttribute.cs" />
     <Compile Include="MessageHandler.cs" />
-    <Compile Include="MessageHeader.cs" />
+    <Compile Include="Messages\ChatRequest.cs" />
+    <Compile Include="Messages\ChatResponse.cs" />
+    <Compile Include="Messages\LoginAck.cs" />
+    <Compile Include="Messages\LoginNack.cs" />
     <Compile Include="Messages\LoginRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

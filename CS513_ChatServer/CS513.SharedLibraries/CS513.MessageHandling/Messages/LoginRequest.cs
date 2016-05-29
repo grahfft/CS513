@@ -9,31 +9,35 @@ using CS513.Interfaces.Shared;
 namespace CS513.MessageHandling.Messages
 {
     [Message(MessageCommand.LoginRequest)]
-    public class LoginRequest : IMessage
+    public class LoginRequest : Message, IRequest
     {
-        private MessageHeader header;
-
-        public LoginRequest(MessageHeader header, string message)
+        public LoginRequest()
         {
-            this.header = header;
+            this.Command = MessageCommand.LoginRequest;
         }
 
-        public string Message { get; private set; }
+        public LoginRequest(string sender, string receiver, string contents)
+        {
+            this.Sender = sender;
+            this.Receiver = receiver;
+            this.Contents = contents;
+            this.Command = MessageCommand.LoginRequest;
+        }
 
         public void ProcessMessage(IConnectionHandler connection, ConcurrentDictionary<string, IConnectionHandler> connectionHandlers, IMessageHandler messageHandler)
         {
             IConnectionHandler handler;
             string responseMessage = string.Empty;
-            MessageHeader responseHeader = null;
-
-            if (!connectionHandlers.ContainsKey(this.Message))
+            
+            if (!connectionHandlers.ContainsKey(this.Contents))
             {
-                connectionHandlers.TryAdd(Message, connection);
-                connection.Name = Message;
+                //Remove the place holder name with login name and broadcast login ack to everyone
+                connectionHandlers.TryRemove(connection.Name, out handler);
+                connectionHandlers.TryAdd(this.Contents, connection);
+                connection.Name = this.Contents;
 
-                responseHeader = new MessageHeader("server", Message, MessageCommand.LoginAck);
-                responseMessage = this.Message + "has logged in";
-                IMessage response = messageHandler.GetMessage(responseHeader, responseMessage);
+                responseMessage = this.Contents + "has logged in";
+                IMessage response = messageHandler.GetMessage("server", "all", responseMessage, MessageCommand.LoginAck);
 
                 Task.Run(() =>
                 {
@@ -45,12 +49,11 @@ namespace CS513.MessageHandling.Messages
             }
             else
             {
+                //Login in use don't; kill connection and nack the request to the otherside
                 connectionHandlers.TryRemove(connection.Name, out handler);
-                
 
-                responseHeader = new MessageHeader("server", Message, MessageCommand.LoginNack);
                 responseMessage = "Login already in use";
-                IMessage response = messageHandler.GetMessage(responseHeader, responseMessage);
+                IMessage response = messageHandler.GetMessage("server", connection.Name, responseMessage, MessageCommand.LoginNack);
 
                 Task.Run(() =>
                 {
@@ -58,27 +61,6 @@ namespace CS513.MessageHandling.Messages
                     connection.Dispose();
                 });
             }
-        }
-
-        public void Deserialize(byte[] data)
-        {
-            int dataIndex = this.header.DataSize();
-
-            int messageLength = data.Length - dataIndex;
-            byte[] message = new byte[messageLength + 1];
-
-            Array.Copy(data, dataIndex, message, 0, messageLength);
-        }
-
-        public byte[] Serialize()
-        {
-            List<byte> bytes = new List<byte>();
-
-            bytes.AddRange(this.header.Serialize());
-
-
-
-            return bytes.ToArray();
         }
     }
 }

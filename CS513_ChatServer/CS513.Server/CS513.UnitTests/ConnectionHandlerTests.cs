@@ -48,14 +48,14 @@ namespace CS513.UnitTests
         {
             TaskCompletionSource<IMessage> msgReceived = new TaskCompletionSource<IMessage>();
 
-            Mock<IMessage> messageMock = new Mock<IMessage>();
+            Mock<IRequest> messageMock = new Mock<IRequest>();
             Mock<IConnection> connectionMock = new Mock<IConnection>();
 
             connectionMock.Setup(connection => connection.GetData()).Returns(new byte[0]);
             connectionMock.Setup(connection => connection.IsConnected).Returns(true);
 
             Mock<IMessageHandler> messageHandlerMock = new Mock<IMessageHandler>();
-            messageHandlerMock.Setup(messageHandler => messageHandler.GetMessage(It.IsAny<byte[]>()))
+            messageHandlerMock.Setup(messageHandler => messageHandler.GetRequest(It.IsAny<byte[]>()))
                 .Returns(messageMock.Object);
 
             IConnectionHandler connectionHandler = new ConnectionHandler(connectionMock.Object, messageHandlerMock.Object, "Test");
@@ -77,14 +77,14 @@ namespace CS513.UnitTests
         {
             TaskCompletionSource<IMessage> msgReceived = new TaskCompletionSource<IMessage>();
 
-            IMessage emptyMessage = null;
+            IRequest emptyMessage = null;
             Mock<IConnection> connectionMock = new Mock<IConnection>();
 
             connectionMock.Setup(connection => connection.GetData()).Returns(new byte[0]);
             connectionMock.Setup(connection => connection.IsConnected).Returns(true);
 
             Mock<IMessageHandler> messageHandlerMock = new Mock<IMessageHandler>();
-            messageHandlerMock.Setup(messageHandler => messageHandler.GetMessage(It.IsAny<byte[]>()))
+            messageHandlerMock.Setup(messageHandler => messageHandler.GetRequest(It.IsAny<byte[]>()))
                 .Returns(emptyMessage);
 
             IConnectionHandler connectionHandler = new ConnectionHandler(connectionMock.Object, messageHandlerMock.Object, "Test");

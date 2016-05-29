@@ -25,7 +25,13 @@ namespace CS513.Interfaces
     /// </summary>
     public interface IMessage
     {
-        void ProcessMessage(IConnectionHandler connection, ConcurrentDictionary<string, IConnectionHandler> connectionHandlers, IMessageHandler handler);
+        string Sender { get; }
+
+        string Receiver { get; }
+
+        string Contents { get; }
+
+        MessageCommand Command { get; }
 
         byte[] Serialize();
 

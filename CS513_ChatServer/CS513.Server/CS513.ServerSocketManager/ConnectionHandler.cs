@@ -28,7 +28,7 @@ namespace CS513.ServerSocketManager
             this.Dispose(false);
         }
 
-        public event EventHandler<IMessage> MessageReceived;
+        public event EventHandler<IRequest> MessageReceived;
 
         public event EventHandler Disposing;
 
@@ -65,9 +65,9 @@ namespace CS513.ServerSocketManager
                 }
 
                 byte[] data = this.connection.GetData();
-                IMessage message = this.messageHandler.GetMessage(data);
+                IRequest message = this.messageHandler.GetRequest(data);
 
-                EventHandler<IMessage> handler = this.MessageReceived;
+                EventHandler<IRequest> handler = this.MessageReceived;
                 if (message != null && handler != null)
                 {
                     Task.Run(() => handler(this, message));

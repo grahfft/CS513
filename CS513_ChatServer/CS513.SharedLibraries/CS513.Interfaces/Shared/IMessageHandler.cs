@@ -4,6 +4,10 @@
     {
         IMessage GetMessage(byte[] data);
 
-        IMessage GetMessage(IMessageHeader header, string message);
+        IMessage GetMessage(string sender, string receiver, string contents, MessageCommand command);
+
+        IRequest GetRequest(byte[] data);
+
+        IRequest GetRequest(string sender, string receiver, string contents, MessageCommand command);
     }
 }

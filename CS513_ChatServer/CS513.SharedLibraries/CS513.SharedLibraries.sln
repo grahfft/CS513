@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.Interfaces", "CS513.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.MessageHandling", "CS513.MessageHandling\CS513.MessageHandling.csproj", "{7B0AE258-6E4C-483D-80B9-77799FDB36CA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.UnitTests", "CS513.UnitTests\CS513.UnitTests.csproj", "{18D6703A-E991-4D8D-84A2-162FEAD129D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{7B0AE258-6E4C-483D-80B9-77799FDB36CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B0AE258-6E4C-483D-80B9-77799FDB36CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B0AE258-6E4C-483D-80B9-77799FDB36CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18D6703A-E991-4D8D-84A2-162FEAD129D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18D6703A-E991-4D8D-84A2-162FEAD129D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18D6703A-E991-4D8D-84A2-162FEAD129D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18D6703A-E991-4D8D-84A2-162FEAD129D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
