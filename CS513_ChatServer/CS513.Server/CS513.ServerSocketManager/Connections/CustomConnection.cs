@@ -15,9 +15,16 @@ namespace CS513.ServerSocketManager.Connections
     {
         private Socket socket;
 
+        private bool disposed = false;
+
         public CustomConnection(Socket socket)
         {
             this.socket = socket;
+        }
+
+        ~CustomConnection()
+        {
+            this.Dispose(false);
         }
 
         public void SendMessage(byte[] data)
@@ -28,6 +35,22 @@ namespace CS513.ServerSocketManager.Connections
         public void Connect()
         {
             
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool isDisposing)
+        {
+            if (isDisposing && !this.disposed)
+            {
+                this.disposed = true;
+
+                this.socket.Dispose();
+            }
         }
     }
 }

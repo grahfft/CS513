@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CS513.Interfaces.Server
+namespace CS513.Interfaces.Shared
 {
-    public interface IConnection : IDisposable
+    public interface IMessageHandler
     {
 
     }
