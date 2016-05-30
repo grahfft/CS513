@@ -44,9 +44,18 @@
     <Compile Include="MessageHandler.cs" />
     <Compile Include="Messages\ChatRequest.cs" />
     <Compile Include="Messages\ChatResponse.cs" />
+    <Compile Include="Messages\DisconnectRequest.cs" />
     <Compile Include="Messages\LoginAck.cs" />
     <Compile Include="Messages\LoginNack.cs" />
     <Compile Include="Messages\LoginRequest.cs" />
+    <Compile Include="Messages\UpdateNameAck.cs" />
+    <Compile Include="Messages\UpdateNameNack.cs" />
+    <Compile Include="Messages\UpdateNameRequest.cs" />
+    <Compile Include="Messages\UsersAck.cs" />
+    <Compile Include="Messages\UsersRequest.cs" />
+    <Compile Include="Messages\WhisperAck.cs" />
+    <Compile Include="Messages\WhisperNack.cs" />
+    <Compile Include="Messages\WhisperRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

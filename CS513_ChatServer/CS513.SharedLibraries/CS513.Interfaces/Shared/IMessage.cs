@@ -18,6 +18,9 @@ namespace CS513.Interfaces
         WhisperMessage = 9,
         WhisperAck = 10,
         WhisperNack = 11,
+        UsersRequest = 12,
+        UsersAck = 13,
+        DisconnectRequest = 14,
     }
 
     /// <summary>
