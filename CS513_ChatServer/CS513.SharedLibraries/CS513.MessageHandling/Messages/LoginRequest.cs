@@ -37,15 +37,12 @@ namespace CS513.MessageHandling.Messages
                 connection.Name = this.Contents;
 
                 responseMessage = this.Contents + "has logged in";
-                IMessage response = messageHandler.GetMessage("server", "all", responseMessage, MessageCommand.LoginAck);
+                IMessage response = messageHandler.GetMessage(this.Contents, "all", responseMessage, MessageCommand.LoginAck);
 
-                Task.Run(() =>
+                foreach (IConnectionHandler connectionHandler in connectionHandlers.Values)
                 {
-                    foreach (IConnectionHandler connectionHandler in connectionHandlers.Values)
-                    {
-                        connectionHandler.SendMessage(response);
-                    }
-                });
+                    connectionHandler.SendMessage(response);
+                }
             }
             else
             {
@@ -55,11 +52,8 @@ namespace CS513.MessageHandling.Messages
                 responseMessage = "Login already in use";
                 IMessage response = messageHandler.GetMessage("server", connection.Name, responseMessage, MessageCommand.LoginNack);
 
-                Task.Run(() =>
-                {
-                    connection.SendMessage(response);
-                    connection.Dispose();
-                });
+                connection.SendMessage(response);
+                connection.Dispose();
             }
         }
     }

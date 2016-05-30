@@ -33,22 +33,16 @@ namespace CS513.MessageHandling.Messages
             {
                 IMessage response = handler.GetMessage(this.Sender, this.Receiver, this.Contents,
                     MessageCommand.WhisperAck);
-
-                Task.Run(() =>
-                {
-                    connection.SendMessage(response);
-                    receiverHandler.SendMessage(response);
-                });
+               
+                connection.SendMessage(response);
+                receiverHandler.SendMessage(response);              
             }
             else
             {
                 IMessage response = handler.GetMessage(this.Sender, this.Receiver, string.Format("Could not find user {0}\n", this.Receiver),
                     MessageCommand.WhisperNack);
-
-                Task.Run(() =>
-                {
-                    connection.SendMessage(response);
-                });
+              
+                connection.SendMessage(response);
             }
         }
     }

@@ -30,7 +30,7 @@ namespace CS513.MessageHandling.Messages
         {
             IConnectionHandler placeHolder;
             connectionHandlers.TryRemove(this.Sender, out placeHolder);
-            placeHolder.Dispose();
+            connection.Dispose();
         }
     }
 }

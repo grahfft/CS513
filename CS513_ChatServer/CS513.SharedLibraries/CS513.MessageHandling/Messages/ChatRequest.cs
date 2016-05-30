@@ -29,13 +29,11 @@ namespace CS513.MessageHandling.Messages
         public void ProcessMessage(IConnectionHandler connection, ConcurrentDictionary<string, IConnectionHandler> connectionHandlers, IMessageHandler handler)
         {
             IMessage response = handler.GetMessage(this.Sender, this.Receiver, this.Contents, MessageCommand.ChatAck);
-            Task.Run(() =>
+            
+            foreach (IConnectionHandler connectionHandler in connectionHandlers.Values)
             {
-                foreach (IConnectionHandler connectionHandler in connectionHandlers.Values)
-                {
-                    connectionHandler.SendMessage(response);
-                }
-            });
+                connectionHandler.SendMessage(response);
+            }
         }
     }
 }
