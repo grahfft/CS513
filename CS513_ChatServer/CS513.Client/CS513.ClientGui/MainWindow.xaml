@@ -1,0 +1,21 @@
+﻿<Window x:Class="CS513.ClientGui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TextBox Height="231" HorizontalAlignment="Left" Margin="11,38,0,0" Name="chatBox" VerticalAlignment="Top" Width="356" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
+        <Label Content="Current Users:" Height="28" HorizontalAlignment="Left" Margin="373,10,0,0" Name="label3" VerticalAlignment="Top" Width="98" />
+        <!--<TextBox Height="231" HorizontalAlignment="Left" Margin="373,38,0,0" Name="currentUsers" VerticalAlignment="Top" Width="117" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />-->
+        <DataGrid Height="231" HorizontalAlignment="Left" Margin="373,38,0,0" Name="currentUsers" VerticalAlignment="Top" Width="117" IsReadOnly="True" VerticalScrollBarVisibility="Auto" >
+            
+            
+        </DataGrid>
+        <Label Content="Local Name:" Height="28" HorizontalAlignment="Left" Margin="11,8,0,0" Name="label4" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="101,8,0,0" Name="localName" VerticalAlignment="Top" Width="117" />
+        <Label Content="Message:" Height="28" HorizontalAlignment="Left" Margin="5,272,0,0" Name="label5" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="62,274,0,0" Name="messageText" VerticalAlignment="Top" Width="305" />
+        <Button Content="Send" Height="23" HorizontalAlignment="Left" Margin="373,274,0,0" Name="sendMessageButton" VerticalAlignment="Top" Width="117" Click="OnSendMessagePress"/>
+        <Button Content="Login" Height="22" HorizontalAlignment="Left" Margin="234,8,0,0" x:Name="login" VerticalAlignment="Top" Click="OnLoginPress"/>
+        <Button Content="Change Name" Height="22" HorizontalAlignment="Left" Margin="286,8,0,0" Name="changeName" VerticalAlignment="Top" Click="OnUpdateNamePress"/>
+    </Grid>
+</Window>

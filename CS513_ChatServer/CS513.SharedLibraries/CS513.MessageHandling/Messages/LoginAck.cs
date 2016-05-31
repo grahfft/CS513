@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CS513.Interfaces;
+using CS513.Interfaces.Client;
 using CS513.Interfaces.Server;
 using CS513.Interfaces.Shared;
 
@@ -15,7 +16,7 @@ namespace CS513.MessageHandling.Messages
     /// Strongly defined in case an IResponse needs to be implemented
     /// </summary>
     [Message(MessageCommand.LoginAck)]
-    public class LoginAck : Message, IMessage
+    public class LoginAck : Message, IResponse
     {
         public LoginAck()
         {
@@ -28,6 +29,12 @@ namespace CS513.MessageHandling.Messages
             this.Receiver = receiver;
             this.Contents = contents;
             this.Command = MessageCommand.LoginAck;
+        }
+
+        public void ProcessMessage(IUserManager userManager, ILog log)
+        {
+            log.LogMessage(string.Format("{0} has entered the room", this.Sender));
+            userManager.AddUser(this.Sender);
         }
     }
 }

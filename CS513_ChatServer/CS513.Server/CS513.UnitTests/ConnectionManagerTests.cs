@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using CS513.Interfaces;
@@ -62,6 +63,7 @@ namespace CS513.UnitTests
             bool success = connectionReceived.Task.Wait(1000);
             Assert.IsTrue(success);
             Assert.AreEqual(connectionManager.ConnectionHandlers.Count, currentCount + 1);
+            connectionHandlerMock.Verify(connection => connection.Connect(), Times.Once);
         }
 
         [TestMethod]

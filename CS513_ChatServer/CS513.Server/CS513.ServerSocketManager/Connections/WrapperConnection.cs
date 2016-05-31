@@ -42,7 +42,7 @@ namespace CS513.ServerSocketManager.Connections
 
         public byte[] GetData()
         {
-            byte[] bytes = new byte[1048576];//TODO figure out a better way this is nasty; currently set to 1 MB of data
+            byte[] bytes = new byte[this.socket.Available];//TODO figure out a better way this is nasty; currently set to 1 MB of data
 
             if (this.client == null || !this.client.Connected)
             {
@@ -56,7 +56,8 @@ namespace CS513.ServerSocketManager.Connections
                 int readSoFar = 0;
                 while (stream.DataAvailable)
                 {
-                    int interval = stream.Read(bytes, readSoFar, 1028);
+                    int read = bytes.Length - readSoFar > 1028 ? 1028 : bytes.Length - readSoFar;
+                    int interval = stream.Read(bytes, readSoFar, read);
                     readSoFar = readSoFar + interval;
                 }
             }

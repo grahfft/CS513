@@ -9,5 +9,9 @@
         IRequest GetRequest(byte[] data);
 
         IRequest GetRequest(string sender, string receiver, string contents, MessageCommand command);
+
+        IResponse GetResponse(byte[] data);
+
+        IResponse GetResponse(string sender, string receiver, string contents, MessageCommand command);
     }
 }

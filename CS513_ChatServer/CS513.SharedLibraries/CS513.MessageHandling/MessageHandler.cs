@@ -24,17 +24,21 @@ namespace CS513.MessageHandling
 
         public IMessage GetMessage(byte[] data)
         {
-            MessageCommand command = (MessageCommand)IPAddress.NetworkToHostOrder((int)BitConverter.ToUInt32(data, 0));
-
-            Type messageType;
-
             IMessage message = null;
-            if (this.messages.TryGetValue(command, out messageType))
+            if (data.Length > sizeof (int))
             {
-                message = (IMessage) Activator.CreateInstance(messageType);
-                message.Deserialize(data);
-            }
+                MessageCommand command =
+                    (MessageCommand) IPAddress.NetworkToHostOrder((int) BitConverter.ToUInt32(data, 0));
 
+                Type messageType;
+
+
+                if (this.messages.TryGetValue(command, out messageType))
+                {
+                    message = (IMessage) Activator.CreateInstance(messageType);
+                    message.Deserialize(data);
+                }
+            }
             return message;
         }
 
@@ -61,6 +65,18 @@ namespace CS513.MessageHandling
         {
             IMessage message = this.GetMessage(sender, receiver, contents, command);
             return (IRequest) message;
+        }
+
+        public IResponse GetResponse(byte[] data)
+        {
+            IMessage message = this.GetMessage(data);
+            return (IResponse)message;
+        }
+
+        public IResponse GetResponse(string sender, string receiver, string contents, MessageCommand command)
+        {
+            IMessage message = this.GetMessage(sender, receiver, contents, command);
+            return (IResponse)message;
         }
 
         private void LoadMessages()

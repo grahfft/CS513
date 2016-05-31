@@ -54,6 +54,7 @@ namespace CS513.ServerSocketManager
             IConnectionHandler connectionHandler = this.factory.GetNewConnection(socket);
             connectionHandler.MessageReceived += this.HandleIncomingMessage;
             connectionHandler.Disposing += this.HandleConnectionDispose;
+            connectionHandler.Connect();
 
             this.connectionHandlers.TryAdd(connectionHandler.Name, connectionHandler);
         }

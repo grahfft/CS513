@@ -38,16 +38,13 @@ namespace CS513.SocketListener.Listeners
         {
             try
             {
-                if (this.listener.Pending())
-                {
-                    Socket newSocket = this.listener.EndAcceptSocket(ar);
+                Socket newSocket = this.listener.EndAcceptSocket(ar);
 
-                    EventHandler<Socket> handler = this.NewConnectionReceived;
-                    if (handler != null)
-                    {
-                        handler(this, newSocket);
-                    }
-                }
+                EventHandler<Socket> handler = this.NewConnectionReceived;
+                if (handler != null && newSocket != null)
+                {
+                    handler(this, newSocket);
+                }               
 
                 this.listener.BeginAcceptSocket(this.SocketAccepted, this.listener);
             }

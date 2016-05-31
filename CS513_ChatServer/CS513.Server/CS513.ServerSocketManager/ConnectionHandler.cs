@@ -70,7 +70,7 @@ namespace CS513.ServerSocketManager
                 EventHandler<IRequest> handler = this.MessageReceived;
                 if (message != null && handler != null)
                 {
-                    Task.Run(() => handler(this, message));
+                    handler(this, message);
                 }
 
                 if (currentRestart)

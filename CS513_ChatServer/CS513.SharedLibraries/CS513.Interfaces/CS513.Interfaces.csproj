@@ -39,6 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client\IClient.cs" />
+    <Compile Include="Client\IClientHandler.cs" />
+    <Compile Include="Client\ILog.cs" />
+    <Compile Include="Client\IResponseManager.cs" />
+    <Compile Include="Client\IUser.cs" />
+    <Compile Include="Client\IUserManager.cs" />
     <Compile Include="Server\IConnection.cs" />
     <Compile Include="Server\IConnectionFactory.cs" />
     <Compile Include="Server\IConnectionHandler.cs" />
@@ -48,7 +54,7 @@
     <Compile Include="Shared\IMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\IMessageHandler.cs" />
-    <Compile Include="Shared\IMessageHeader.cs" />
+    <Compile Include="Shared\IResponse.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

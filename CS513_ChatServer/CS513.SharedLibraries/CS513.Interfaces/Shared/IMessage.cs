@@ -21,6 +21,7 @@ namespace CS513.Interfaces
         UsersRequest = 12,
         UsersAck = 13,
         DisconnectRequest = 14,
+        DisconnectResponse = 15,
     }
 
     /// <summary>
