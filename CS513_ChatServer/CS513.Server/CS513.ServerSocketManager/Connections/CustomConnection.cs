@@ -38,7 +38,7 @@ namespace CS513.ServerSocketManager.Connections
 
         public byte[] GetData()
         {
-            byte[] bytes = new byte[this.socket.Available + 1];
+            byte[] bytes = new byte[this.socket.Available];
 
             if (!this.socket.Connected)
             {

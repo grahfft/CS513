@@ -23,7 +23,7 @@ namespace CS513.ChatHandling
 
         public void LogChat(string sender, string message)
         {
-            string output = string.Format("{0} says: {1}", sender, message);
+            string output = string.Format("{0} says: {1}\n", sender, message);
             this.thread.BeginInvoke(new Action(() =>
             {
                 this.PrintMsg(output);
@@ -32,7 +32,7 @@ namespace CS513.ChatHandling
 
         public void LogWhisper(string sender, string message)
         {
-            string output = string.Format("{0} whispers: {1}", sender, message);
+            string output = string.Format("{0} whispers: {1}\n", sender, message);
             this.thread.BeginInvoke(new Action(() =>
             {
                 this.PrintMsg(output);
@@ -41,9 +41,10 @@ namespace CS513.ChatHandling
 
         public void LogMessage(string message)
         {
+            string output = string.Format("{0}\n", message);
             this.thread.BeginInvoke(new Action(() =>
             {
-                this.PrintMsg(message);
+                this.PrintMsg(output);
             }));
         }
 
