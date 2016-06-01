@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.ClientGui", "CS513.ClientGui\CS513.ClientGui.csproj", "{888A170C-1AA3-4C4F-A3F3-97262E434AEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.Network", "CS513.Network\CS513.Network.csproj", "{B8E1D1A3-414C-4848-BDF9-1E95CF49A98B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.ClientServices", "CS513.ClientServices\CS513.ClientServices.csproj", "{D10CDA31-2FBC-4E0B-9861-9ADA3D4D4BF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.UserManagement", "CS513.UserManagement\CS513.UserManagement.csproj", "{8E695554-9E90-44F0-865F-787DBA69D7D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.ChatHandling", "CS513.ChatHandling\CS513.ChatHandling.csproj", "{5A9BF07A-08AE-4D0F-B542-2AA24D34C0D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS513.ResponseManagement", "CS513.ResponseManagement\CS513.ResponseManagement.csproj", "{B5BEE915-7AF4-4643-ABC3-F076A27CDA08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{888A170C-1AA3-4C4F-A3F3-97262E434AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{888A170C-1AA3-4C4F-A3F3-97262E434AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{888A170C-1AA3-4C4F-A3F3-97262E434AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{888A170C-1AA3-4C4F-A3F3-97262E434AEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E1D1A3-414C-4848-BDF9-1E95CF49A98B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E1D1A3-414C-4848-BDF9-1E95CF49A98B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E1D1A3-414C-4848-BDF9-1E95CF49A98B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E1D1A3-414C-4848-BDF9-1E95CF49A98B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D10CDA31-2FBC-4E0B-9861-9ADA3D4D4BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D10CDA31-2FBC-4E0B-9861-9ADA3D4D4BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D10CDA31-2FBC-4E0B-9861-9ADA3D4D4BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D10CDA31-2FBC-4E0B-9861-9ADA3D4D4BF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E695554-9E90-44F0-865F-787DBA69D7D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E695554-9E90-44F0-865F-787DBA69D7D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E695554-9E90-44F0-865F-787DBA69D7D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E695554-9E90-44F0-865F-787DBA69D7D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A9BF07A-08AE-4D0F-B542-2AA24D34C0D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A9BF07A-08AE-4D0F-B542-2AA24D34C0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A9BF07A-08AE-4D0F-B542-2AA24D34C0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A9BF07A-08AE-4D0F-B542-2AA24D34C0D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5BEE915-7AF4-4643-ABC3-F076A27CDA08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5BEE915-7AF4-4643-ABC3-F076A27CDA08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5BEE915-7AF4-4643-ABC3-F076A27CDA08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5BEE915-7AF4-4643-ABC3-F076A27CDA08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
