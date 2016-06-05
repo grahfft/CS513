@@ -27,37 +27,130 @@ namespace CS513.ClientGui
     {
         private Services services;
 
+        private string Name;
+
         public MainWindow()
         {
             InitializeComponent();
             ILog log = new ChatLogger(this.chatBox, this.Dispatcher);
             this.services = new Services(log);
+            this.currentUsers.DataContext = this.services.UserManager;
+
+            this.Closed += this.SendDisconnect;
+        }
+
+        private void SendDisconnect(object sender, EventArgs e)
+        {
+            try
+            {
+                IMessageHandler messageHandler = this.services.MessageHandler;
+                IMessage request = messageHandler.GetMessage(this.Name, "server", this.Name,
+                    MessageCommand.DisconnectRequest);
+
+                IClientHandler clientHandler = this.services.ClientHandler;
+                clientHandler.SendMessage(request);
+            }
+            catch (Exception exception)
+            {
+                this.services.ChatLog.LogMessage(string.Format("Unable to send disconnect : {0}", exception.Message));
+            }
         }
 
         private void OnSendMessagePress(object sender, RoutedEventArgs e)
         {
+            //Capture message text
+            string message = this.messageText.Text;
+            string messageSender = this.Name;
 
+            //send message
+            Task.Run(() =>
+            {
+                try
+                {
+                    IMessageHandler messageHandler = this.services.MessageHandler;
+                    IMessage request = messageHandler.GetMessage(messageSender, "server", message,
+                        MessageCommand.ChatMessage);
+
+                    IClientHandler clientHandler = this.services.ClientHandler;
+                    clientHandler.SendMessage(request);
+                }
+                catch (Exception exception)
+                {
+                    this.services.ChatLog.LogMessage(string.Format("Unable to send message : {0}", exception.Message));
+                }
+            });
+
+            //Clear message text from box
+            this.messageText.Clear();
         }
 
         private void OnLoginPress(object sender, RoutedEventArgs e)
         {
+            //purposely using variable capturing here
             string loginName = this.localName.Text;
+            this.Name = loginName;
+
+            //get sending task off the GUI thread
             Task.Run(() =>
             {
-                IResponseManager responseManager = this.services.ResponseManager;
-                responseManager.Start();
+                try
+                {
+                    IResponseManager responseManager = this.services.ResponseManager;
+                    responseManager.Start();
 
-                IMessageHandler messageHandler = this.services.MessageHandler;
-                IMessage request = messageHandler.GetMessage(loginName, "server", loginName, MessageCommand.LoginRequest);
+                    IMessageHandler messageHandler = this.services.MessageHandler;
+                    IMessage request = messageHandler.GetMessage(loginName, "server", loginName,
+                        MessageCommand.LoginRequest);
 
-                IClientHandler clientHandler = this.services.ClientHandler;
-                clientHandler.SendMessage(request);
+                    IClientHandler clientHandler = this.services.ClientHandler;
+                    clientHandler.SendMessage(request);
+                }
+                catch (Exception exception)
+                {
+                    this.services.ChatLog.LogMessage(string.Format("Unable to send log in : {0}", exception.Message));
+                }
             });
         }
 
         private void OnUpdateNamePress(object sender, RoutedEventArgs e)
         {
+            //purposely using variable capturing here
+            string newName = this.localName.Text;
+            string oldName = this.Name;
+            this.Name = newName;
+            
+            //get sending task off the GUI thread
+            Task.Run(() =>
+            {
+                try
+                {
+                    IMessageHandler messageHandler = this.services.MessageHandler;
+                    IMessage request = messageHandler.GetMessage(oldName, "server", newName, MessageCommand.UpdateName);
 
+                    IClientHandler clientHandler = this.services.ClientHandler;
+                    clientHandler.SendMessage(request);
+                }
+                catch (Exception exception)
+                {
+                    this.services.ChatLog.LogMessage(string.Format("Unable to send name update : {0}", exception.Message));
+                }
+            });
+        }
+
+        /// <summary>
+        /// Method for whispering a user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnWhisperUser(object sender, RoutedEventArgs e)
+        {
+            IUser user = (IUser)this.currentUsers.SelectedItem;
+            if (user != null)
+            {
+                WhisperWindow whisper = new WhisperWindow(this.Name, user.Name, this.services);
+
+                whisper.ShowDialog();
+            }
         }
     }
 }

@@ -37,7 +37,14 @@ namespace CS513.Network
 
         public void SendMessage(IMessage message)
         {
-            this.client.SendMessage(message.Serialize());
+            try
+            {
+                this.client.SendMessage(message.Serialize());
+            }
+            catch (Exception exception)
+            {
+                throw;
+            }
         }
 
         public void Connect()

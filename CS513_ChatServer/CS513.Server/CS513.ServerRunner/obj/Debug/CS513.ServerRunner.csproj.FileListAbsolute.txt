@@ -1,17 +1,1 @@
 D:\Algorithms Playground\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.ServerRunner.exe.config
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.ServerRunner.exe.config
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.ServerRunner.exe
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.ServerRunner.pdb
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.Interfaces.dll
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.Server.dll
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.SocketListener.dll
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.MessageHandling.dll
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.ServerSocketManager.dll
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.Server.pdb
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.Interfaces.pdb
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.SocketListener.pdb
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.MessageHandling.pdb
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\bin\Debug\CS513.ServerSocketManager.pdb
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\obj\Debug\CS513.ServerRunner.csprojResolveAssemblyReference.cache
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\obj\Debug\CS513.ServerRunner.exe
-D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.Server\CS513.ServerRunner\obj\Debug\CS513.ServerRunner.pdb

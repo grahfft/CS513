@@ -60,7 +60,7 @@ namespace CS513.ServerSocketManager
                 if (!this.connection.IsConnected && currentRestart)
                 {
                     //this.logger.LogInfo(string.Format("Client disconnected attempting to reconnect"));
-                    this.Connect();
+                    //this.Connect();
                     return;
                 }
 

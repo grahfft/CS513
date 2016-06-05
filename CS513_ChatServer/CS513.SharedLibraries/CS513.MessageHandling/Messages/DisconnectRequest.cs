@@ -31,6 +31,14 @@ namespace CS513.MessageHandling.Messages
             IConnectionHandler placeHolder;
             connectionHandlers.TryRemove(this.Sender, out placeHolder);
             connection.Dispose();
+
+            IResponse response = handler.GetResponse(this.Sender, "all", this.Contents,
+                MessageCommand.DisconnectResponse);
+
+            foreach (IConnectionHandler connectionHandler in connectionHandlers.Values)
+            {
+                connectionHandler.SendMessage(response);
+            }
         }
     }
 }

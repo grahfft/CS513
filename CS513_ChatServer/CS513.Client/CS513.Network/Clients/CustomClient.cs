@@ -40,10 +40,7 @@ namespace CS513.Network.Clients
 
         public void SendMessage(byte[] data)
         {
-            if (this.socket.Connected)
-            {
-                this.socket.Send(data);
-            }
+            this.socket.Send(data);
         }
 
         public byte[] GetData()

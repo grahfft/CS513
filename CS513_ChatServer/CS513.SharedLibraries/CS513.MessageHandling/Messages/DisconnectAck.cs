@@ -27,7 +27,7 @@ namespace CS513.MessageHandling.Messages
 
         public void ProcessMessage(IUserManager userManager, ILog log)
         {
-            log.LogMessage(string.Format("{0} has left", this.Sender));
+            log.LogMessage(string.Format("{0} has left the room", this.Sender));
             userManager.RemoveUser(this.Sender);
         }
     }

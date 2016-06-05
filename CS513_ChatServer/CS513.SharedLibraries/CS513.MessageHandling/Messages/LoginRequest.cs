@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using CS513.Interfaces;
 using CS513.Interfaces.Server;
@@ -36,7 +37,8 @@ namespace CS513.MessageHandling.Messages
                 connectionHandlers.TryAdd(this.Contents, connection);
                 connection.Name = this.Contents;
 
-                responseMessage = this.Contents + "has logged in";
+                responseMessage = connectionHandlers.Keys.Aggregate(string.Empty, (current, userName) => current + "|" + userName);
+                
                 IMessage response = messageHandler.GetMessage(this.Contents, "all", responseMessage, MessageCommand.LoginAck);
 
                 foreach (IConnectionHandler connectionHandler in connectionHandlers.Values)

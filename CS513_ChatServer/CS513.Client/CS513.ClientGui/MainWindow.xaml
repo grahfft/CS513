@@ -3,12 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <TextBox Height="231" HorizontalAlignment="Left" Margin="11,38,0,0" Name="chatBox" VerticalAlignment="Top" Width="356" IsReadOnly="True" VerticalScrollBarVisibility="Visible" />
+        <TextBox Height="231" HorizontalAlignment="Left" Margin="11,38,0,0" Name="chatBox" VerticalAlignment="Top" Width="356" IsReadOnly="True" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto" TextWrapping="WrapWithOverflow"/>
         <Label Content="Current Users:" Height="28" HorizontalAlignment="Left" Margin="373,10,0,0" Name="label3" VerticalAlignment="Top" Width="98" />
         <!--<TextBox Height="231" HorizontalAlignment="Left" Margin="373,38,0,0" Name="currentUsers" VerticalAlignment="Top" Width="117" IsReadOnly="True" VerticalScrollBarVisibility="Auto" />-->
-        <DataGrid Height="231" HorizontalAlignment="Left" Margin="373,38,0,0" Name="currentUsers" VerticalAlignment="Top" Width="117" IsReadOnly="True" VerticalScrollBarVisibility="Auto" >
-            
-            
+        <DataGrid Height="231" HorizontalAlignment="Left" Margin="373,38,0,0" Name="currentUsers" VerticalAlignment="Top" Width="117" IsReadOnly="True" VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Path=Users}" AutoGenerateColumns="False" ColumnWidth="Auto" ToolTip="Right Click to Whisper another user!" HorizontalScrollBarVisibility="Disabled">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Name}" FontWeight="Bold" Width="117">
+                </DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Whisper" Click="OnWhisperUser"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>           
         </DataGrid>
         <Label Content="Local Name:" Height="28" HorizontalAlignment="Left" Margin="11,8,0,0" Name="label4" VerticalAlignment="Top" />
         <TextBox Height="23" HorizontalAlignment="Left" Margin="101,8,0,0" Name="localName" VerticalAlignment="Top" Width="117" />

@@ -37,7 +37,7 @@ namespace CS513.MessageHandling.Messages
                 connectionHandler.Name = this.Contents;
 
                 IMessage response = handler.GetMessage(this.Sender, this.Receiver,
-                    string.Format("Updating user {0} to {1}", connection.Name, this.Contents), MessageCommand.UpdateAck);
+                    this.Contents, MessageCommand.UpdateAck);
 
                 foreach (IConnectionHandler otherConnectionHandler in connectionHandlers.Values)
                 {

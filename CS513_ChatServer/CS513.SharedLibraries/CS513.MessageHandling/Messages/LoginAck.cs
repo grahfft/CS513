@@ -35,6 +35,15 @@ namespace CS513.MessageHandling.Messages
         {
             log.LogMessage(string.Format("{0} has entered the room", this.Sender));
             userManager.AddUser(this.Sender);
+
+            string[] otherUsers = this.Contents.Split('|');
+            foreach (string user in otherUsers)
+            {
+                if (user != "")
+                {
+                    userManager.AddUser(user);
+                }
+            }
         }
     }
 }
