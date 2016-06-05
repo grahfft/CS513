@@ -16,7 +16,7 @@ namespace CS513.SocketListener.Listeners
 
         private TcpListener listener;
 
-        public WrapperListener(int port)
+        public WrapperListener(string address, int port)
         {
             this.listener = new TcpListener(IPAddress.Any, port);
         }

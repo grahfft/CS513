@@ -19,8 +19,11 @@ namespace CS513.SocketListener.Listeners
 
         private int port;
 
-        public CustomListener(int port)
+        private string address;
+
+        public CustomListener(string address, int port)
         {
+            this.address = address;
             this.port = port;
         }
 
@@ -31,7 +34,7 @@ namespace CS513.SocketListener.Listeners
             try
             {
                 System.Net.IPHostEntry localhost = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
-                IPAddress address = IPAddress.Parse("127.0.0.1");
+                IPAddress address = IPAddress.Parse(this.address);
                 System.Net.IPEndPoint serverEndPoint = new IPEndPoint(address, this.port);
 
                 this.listenerSocket = new Socket(serverEndPoint.Address.AddressFamily, SocketType.Stream, ProtocolType.IP);
