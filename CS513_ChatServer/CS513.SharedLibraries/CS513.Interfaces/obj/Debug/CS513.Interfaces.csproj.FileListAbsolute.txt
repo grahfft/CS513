@@ -3,3 +3,7 @@ D:\Algorithms Playground\CS513_ChatServer\CS513.SharedLibraries\CS513.Interfaces
 D:\Algorithms Playground\CS513_ChatServer\CS513.SharedLibraries\CS513.Interfaces\obj\Debug\CS513.Interfaces.csprojResolveAssemblyReference.cache
 D:\Algorithms Playground\CS513_ChatServer\CS513.SharedLibraries\CS513.Interfaces\obj\Debug\CS513.Interfaces.dll
 D:\Algorithms Playground\CS513_ChatServer\CS513.SharedLibraries\CS513.Interfaces\obj\Debug\CS513.Interfaces.pdb
+D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.SharedLibraries\CS513.Interfaces\bin\Debug\CS513.Interfaces.dll
+D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.SharedLibraries\CS513.Interfaces\bin\Debug\CS513.Interfaces.pdb
+D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.SharedLibraries\CS513.Interfaces\obj\Debug\CS513.Interfaces.dll
+D:\Algorithms Playground\CS513\CS513_ChatServer\CS513.SharedLibraries\CS513.Interfaces\obj\Debug\CS513.Interfaces.pdb

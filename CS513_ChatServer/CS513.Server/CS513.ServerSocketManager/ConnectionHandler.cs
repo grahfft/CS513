@@ -57,20 +57,27 @@ namespace CS513.ServerSocketManager
             Task.Run(() =>
             {
                 bool currentRestart = this.restart;
-                if (!this.connection.IsConnected && currentRestart)
+                try
                 {
-                    //this.logger.LogInfo(string.Format("Client disconnected attempting to reconnect"));
-                    //this.Connect();
-                    return;
+                    if (!this.connection.IsConnected && currentRestart)
+                    {
+                        //this.logger.LogInfo(string.Format("Client disconnected attempting to reconnect"));
+                        this.MonitorConnection();
+                        return;
+                    }
+
+                    byte[] data = this.connection.GetData();
+                    IRequest message = this.messageHandler.GetRequest(data);
+
+                    EventHandler<IRequest> handler = this.MessageReceived;
+                    if (message != null && handler != null)
+                    {
+                        handler(this, message);
+                    }
                 }
-
-                byte[] data = this.connection.GetData();
-                IRequest message = this.messageHandler.GetRequest(data);
-
-                EventHandler<IRequest> handler = this.MessageReceived;
-                if (message != null && handler != null)
+                catch (Exception exception)
                 {
-                    handler(this, message);
+                    
                 }
 
                 if (currentRestart)
