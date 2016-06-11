@@ -21,6 +21,12 @@ namespace CS513.Network.Clients
         private int port;
         private bool disposed = false;
 
+        /// <summary>
+        /// Constructor for the CustomClient
+        /// Creates a stream based socket with an IP protocol
+        /// </summary>
+        /// <param name="address">address of the server</param>
+        /// <param name="port">port of the address</param>
         public CustomClient(string address, int port)
         {
             this.address = address;
@@ -33,16 +39,28 @@ namespace CS513.Network.Clients
             this.Dispose(false);
         }
 
+        /// <summary>
+        /// Checks if the socket is connected
+        /// </summary>
         public bool IsConnected
         {
             get { return this.socket.Connected; }
         }
 
+        /// <summary>
+        /// Send message byte data to the server
+        /// </summary>
+        /// <param name="data">data to be sent</param>
         public void SendMessage(byte[] data)
         {
             this.socket.Send(data);
         }
 
+        /// <summary>
+        /// Checks available data of the socket.
+        /// Gets all available data and returns it
+        /// </summary>
+        /// <returns>All data available from the socket</returns>
         public byte[] GetData()
         {
             int dataAvailable = this.socket.Available;
@@ -56,6 +74,9 @@ namespace CS513.Network.Clients
             return bytes;
         }
 
+        /// <summary>
+        /// Connects to the server
+        /// </summary>
         public void Connect()
         {
             try
@@ -68,6 +89,9 @@ namespace CS513.Network.Clients
             }
         }
 
+        /// <summary>
+        /// Dispose pattern to clean up connection
+        /// </summary>
         public void Dispose()
         {
             this.Dispose(true);

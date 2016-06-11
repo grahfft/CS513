@@ -16,13 +16,16 @@ namespace CS513.SocketListener.Listeners
 
         private TcpListener listener;
 
-        public WrapperListener(string address, int port)
+        public WrapperListener(int port)
         {
             this.listener = new TcpListener(IPAddress.Any, port);
         }
 
         public event EventHandler<Socket> NewConnectionReceived;
 
+        /// <summary>
+        /// Listens for 
+        /// </summary>
         public void Start()
         {
             this.listener.Start();

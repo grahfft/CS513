@@ -9,6 +9,10 @@ using CS513.Interfaces.Client;
 
 namespace CS513.UserManagement
 {
+    /// <summary>
+    /// Class designed using MVVM pattern
+    /// Meant to display names of active users
+    /// </summary>
     public class User : IUser
     {
         private string currentName;
@@ -20,6 +24,9 @@ namespace CS513.UserManagement
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// UserName
+        /// </summary>
         public string Name
         {
             get
@@ -32,8 +39,12 @@ namespace CS513.UserManagement
                 this.OnPropertyChanged("Name");
             }
         }
-        
-        protected void OnPropertyChanged(string propertyName)
+
+        /// <summary>
+        /// Notify UI a property has changed
+        /// </summary>
+        /// <param name="propertyName">property to update</param>
+        private void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
             if (handler != null)

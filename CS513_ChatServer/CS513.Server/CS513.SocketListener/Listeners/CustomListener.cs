@@ -21,21 +21,21 @@ namespace CS513.SocketListener.Listeners
 
         private string address;
 
-        public CustomListener(string address, int port)
+        public CustomListener(int port)
         {
-            this.address = address;
             this.port = port;
         }
 
         public event EventHandler<Socket> NewConnectionReceived;
 
+        /// <summary>
+        /// Begin Listening for connections coming in
+        /// </summary>
         public void Start()
         {
             try
             {
-                System.Net.IPHostEntry localhost = System.Net.Dns.GetHostEntry(System.Net.Dns.GetHostName());
-                IPAddress address = IPAddress.Parse(this.address);
-                System.Net.IPEndPoint serverEndPoint = new IPEndPoint(address, this.port);
+                System.Net.IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Any, this.port);
 
                 this.listenerSocket = new Socket(serverEndPoint.Address.AddressFamily, SocketType.Stream, ProtocolType.IP);
 
@@ -49,11 +49,20 @@ namespace CS513.SocketListener.Listeners
             }
         }
 
+        /// <summary>
+        /// Stop listening for connections
+        /// </summary>
         public void Stop()
         {
             this.listenerSocket.Dispose();
         }
 
+        /// <summary>
+        /// Handle an accept coming in
+        /// Notify a new socket connection
+        /// Begin listening again
+        /// </summary>
+        /// <param name="ar">async result of the accept call</param>
         private void HandleAccept(IAsyncResult ar)
         {
             try

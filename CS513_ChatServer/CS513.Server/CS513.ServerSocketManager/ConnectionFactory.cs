@@ -25,6 +25,11 @@ namespace CS513.ServerSocketManager
             this.LoadConfigs();
         }
 
+        /// <summary>
+        /// Creates a new connection handler
+        /// </summary>
+        /// <param name="socket">socket of connected client</param>
+        /// <returns>connection handler for connected client</returns>
         public IConnectionHandler GetNewConnection(Socket socket)
         {
             IConnection connection = null;
@@ -41,6 +46,9 @@ namespace CS513.ServerSocketManager
             return new ConnectionHandler(connection, this.messageHandler, this.connectionId++.ToString());
         }
 
+        /// <summary>
+        /// Use reflection to load the right type of connection to create
+        /// </summary>
         private void LoadConfigs()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

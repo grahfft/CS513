@@ -2,6 +2,9 @@
 
 namespace CS513.ServerSocketManager
 {
+    /// <summary>
+    /// Attribute for Connections
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class ConnectionAttribute : Attribute
     {

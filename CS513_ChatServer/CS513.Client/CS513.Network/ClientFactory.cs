@@ -15,11 +15,20 @@ namespace CS513.Network
 
         private IMessageHandler messageHandler;
 
+        /// <summary>
+        /// Construction dependent on the MessageHandler
+        /// </summary>
+        /// <param name="messageHandler">Single Message instance</param>
         public ClientFactory(IMessageHandler messageHandler)
         {
             this.messageHandler = messageHandler;
         }
 
+        /// <summary>
+        /// Checks to see if currentClient is already construected
+        /// if not load configurations and create configured client
+        /// </summary>
+        /// <returns>Proxy handler for the configured client</returns>
         public IClientHandler GetClient()
         {
             if (this.currentClient == null)

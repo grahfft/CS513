@@ -16,6 +16,10 @@ namespace CS513.SocketListener
         {
         }
 
+        /// <summary>
+        /// Create a listener class to accept connections
+        /// </summary>
+        /// <returns>IListener specified by configurations</returns>
         public IListener CreataListener()
         {
             if (this.currentListener == null)
@@ -23,7 +27,6 @@ namespace CS513.SocketListener
                 Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
                 string type = config.AppSettings.Settings["ListenerType"].Value;
                 int port = int.Parse(config.AppSettings.Settings["Port"].Value);
-                string address = config.AppSettings.Settings["Address"].Value;
 
                 Type listenerType = AppDomain.CurrentDomain.GetAssemblies()
                     .SelectMany(a => a.GetTypes())
@@ -39,7 +42,7 @@ namespace CS513.SocketListener
 
                 if (listenerType != null)
                 {
-                    this.currentListener = (IListener) Activator.CreateInstance(listenerType, address, port);
+                    this.currentListener = (IListener) Activator.CreateInstance(listenerType, port);
                 }
             }
 

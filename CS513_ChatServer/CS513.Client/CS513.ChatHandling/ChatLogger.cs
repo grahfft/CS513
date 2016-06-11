@@ -21,6 +21,11 @@ namespace CS513.ChatHandling
             this.thread = thread;
         }
 
+        /// <summary>
+        /// Log a chat message
+        /// </summary>
+        /// <param name="sender">sender of the message</param>
+        /// <param name="message">message to be displayed</param>
         public void LogChat(string sender, string message)
         {
             string output = string.Format("{0} says: {1}\n", sender, message);
@@ -30,6 +35,11 @@ namespace CS513.ChatHandling
             }));
         }
 
+        /// <summary>
+        /// Log a whisper message
+        /// </summary>
+        /// <param name="sender">sender of the whisper</param>
+        /// <param name="message">message whispered</param>
         public void LogWhisper(string sender, string message)
         {
             string output = string.Format("{0} whispers: {1}\n", sender, message);
@@ -39,6 +49,10 @@ namespace CS513.ChatHandling
             }));
         }
 
+        /// <summary>
+        /// Log a system message
+        /// </summary>
+        /// <param name="message">message to log</param>
         public void LogMessage(string message)
         {
             string output = string.Format("{0}\n", message);
@@ -48,6 +62,10 @@ namespace CS513.ChatHandling
             }));
         }
 
+        /// <summary>
+        /// Prints the message to the correct chat window
+        /// </summary>
+        /// <param name="message">message to be printed</param>
         private void PrintMsg(string message)
         {
             this.logger.AppendText(message);

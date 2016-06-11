@@ -10,6 +10,10 @@ using CS513.Interfaces.Shared;
 
 namespace CS513.Network
 {
+    /// <summary>
+    /// Class designed to separate out socket functionality and message processing
+    /// The class is designed this way for testability
+    /// </summary>
     public class ClientHandler : IClientHandler
     {
         private IClient client;
@@ -31,10 +35,17 @@ namespace CS513.Network
             this.Dispose(false);
         }
 
+        /// <summary>
+        /// Event for notifying a response has come in
+        /// </summary>
         public event EventHandler<IResponse> MessageReceived;
 
         public string Name { get; set; }
 
+        /// <summary>
+        /// Sends the necessary data to the underlying socket connection
+        /// </summary>
+        /// <param name="message">message to be sent</param>
         public void SendMessage(IMessage message)
         {
             try
@@ -47,6 +58,10 @@ namespace CS513.Network
             }
         }
 
+        /// <summary>
+        /// Connects client to server
+        /// Begins monitoring for information from the server
+        /// </summary>
         public void Connect()
         {
             try
@@ -61,6 +76,9 @@ namespace CS513.Network
             }
         }
 
+        /// <summary>
+        /// Dedicated thread for checking and processing data from the socket buffer
+        /// </summary>
         private void MonitorConnection()
         {
             Task.Run(() =>
@@ -89,6 +107,10 @@ namespace CS513.Network
             });
         }
 
+
+        /// <summary>
+        /// Dispose patter implemented for clean up
+        /// </summary>
         public void Dispose()
         {
             this.Dispose(true);

@@ -2,6 +2,9 @@
 
 namespace CS513.SocketListener
 {
+    /// <summary>
+    /// Attribute for Listeners
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class ListenerAttribute : Attribute
     {

@@ -10,6 +10,10 @@ using CS513.Interfaces.Shared;
 
 namespace CS513.ServerSocketManager
 {
+    /// <summary>
+    /// Holds all information for processing requests
+    /// Maintains the list of Connections and Listens to each
+    /// </summary>
     public class ConnectionManager : IConnectionManager
     {
         private IListener listener;
@@ -43,12 +47,20 @@ namespace CS513.ServerSocketManager
             }
         }
 
+        /// <summary>
+        /// Sets up and starts the listener
+        /// </summary>
         public void Configure()
         {
             this.listener.NewConnectionReceived += this.CreateNewConnection;
             this.listener.Start();
         }
 
+        /// <summary>
+        /// Creates new connection handler
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="socket"></param>
         private void CreateNewConnection(object sender, Socket socket)
         {
             IConnectionHandler connectionHandler = this.factory.GetNewConnection(socket);
@@ -59,6 +71,11 @@ namespace CS513.ServerSocketManager
             this.connectionHandlers.TryAdd(connectionHandler.Name, connectionHandler);
         }
 
+        /// <summary>
+        /// Handles connection clean up
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void HandleConnectionDispose(object sender, EventArgs e)
         {
             IConnectionHandler connectionHandler = sender as IConnectionHandler;
@@ -71,12 +88,20 @@ namespace CS513.ServerSocketManager
             }
         }
 
+        /// <summary>
+        /// Handles incoming messages from connections
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="message"></param>
         private void HandleIncomingMessage(object sender, IRequest message)
         {
             IConnectionHandler handler = sender as IConnectionHandler;
             Task.Run(() => message.ProcessMessage(handler, this.connectionHandlers, this.messageHandler));
         }
 
+        /// <summary>
+        /// Dispose pattern for clean up
+        /// </summary>
         public void Dispose()
         {
             this.Dispose(true);

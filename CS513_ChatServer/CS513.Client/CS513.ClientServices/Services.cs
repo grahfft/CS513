@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CS513.Interfaces.Client;
+﻿using CS513.Interfaces.Client;
 using CS513.Interfaces.Shared;
 using CS513.MessageHandling;
 using CS513.Network;
@@ -12,6 +7,10 @@ using CS513.UserManagement;
 
 namespace CS513.ClientServices
 {
+    /// <summary>
+    /// This class is responsible for the construction of each object in the client
+    /// This allows dependency injection for testing
+    /// </summary>
     public class Services
     {
         private ClientFactory factory;

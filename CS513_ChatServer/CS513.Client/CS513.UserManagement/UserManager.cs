@@ -11,6 +11,10 @@ using CS513.Interfaces.Client;
 
 namespace CS513.UserManagement
 {
+    /// <summary>
+    /// Class dedicated for updating its internal concurrent dictionary
+    /// Holds on current online users
+    /// </summary>
     public class UserManager : IUserManager
     {
         private ConcurrentDictionary<string, IUser> users; 
@@ -20,6 +24,9 @@ namespace CS513.UserManagement
             this.users = new ConcurrentDictionary<string, IUser>();
         }
 
+        /// <summary>
+        /// Collection of Users for the UI to bind to
+        /// </summary>
         public IReadOnlyCollection<IUser> Users
         {
             get
@@ -30,6 +37,10 @@ namespace CS513.UserManagement
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        /// <summary>
+        /// Adds a User to the internal dictionary
+        /// </summary>
+        /// <param name="userName">user name of user to be added</param>
         public void AddUser(string userName)
         {
             if (users.ContainsKey(userName)) return;
@@ -38,6 +49,10 @@ namespace CS513.UserManagement
             this.OnPropertyChanged("Users");
         }
 
+        /// <summary>
+        /// Removes a User from the current active user list
+        /// </summary>
+        /// <param name="userName">user name of user to be removed</param>
         public void RemoveUser(string userName)
         {
             if (!this.users.ContainsKey(userName)) return;
@@ -46,6 +61,11 @@ namespace CS513.UserManagement
             this.OnPropertyChanged("Users");
         }
 
+        /// <summary>
+        /// Updates the user name of a user
+        /// </summary>
+        /// <param name="oldUserName">old user name of the user</param>
+        /// <param name="newUserName">new user name of the user</param>
         public void UpdateUserName(string oldUserName, string newUserName)
         {
             IUser user;
@@ -63,7 +83,11 @@ namespace CS513.UserManagement
             this.OnPropertyChanged("Users");
         }
 
-        protected void OnPropertyChanged(string propertyName)
+        /// <summary>
+        /// Notifies the UI to update its User list
+        /// </summary>
+        /// <param name="propertyName"></param>
+        private void OnPropertyChanged(string propertyName)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));

@@ -23,6 +23,11 @@ namespace CS513.Network.Clients
         private int port;
         private bool disposed = false;
 
+        /// <summary>
+        /// Constructed using addess and port of server
+        /// </summary>
+        /// <param name="address">address of server</param>
+        /// <param name="port">port of server</param>
         public WrapperClient(string address, int port)
         {
             this.address = address;
@@ -30,16 +35,27 @@ namespace CS513.Network.Clients
             this.client = new TcpClient();
         }
 
+        /// <summary>
+        /// Check if client is still connected
+        /// </summary>
         public bool IsConnected
         {
             get { return this.client.Connected; }
         }
 
+        /// <summary>
+        /// Send converted message to the server
+        /// </summary>
+        /// <param name="messageData">byte array of a message</param>
         public void SendMessage(byte[] messageData)
         {
             this.client.Client.Send(messageData);
         }
 
+        /// <summary>
+        /// Gets the data from the underlying stream.
+        /// </summary>
+        /// <returns>data found in the socket buffer</returns>
         public byte[] GetData()
         {
             byte[] bytes = new byte[this.client.Client.Available];//TODO figure out a better way this is nasty; currently set to 1 MB of data
@@ -65,6 +81,9 @@ namespace CS513.Network.Clients
             return bytes;
         }
 
+        /// <summary>
+        /// Establishes the connection from client to server
+        /// </summary>
         public void Connect()
         {
             try
